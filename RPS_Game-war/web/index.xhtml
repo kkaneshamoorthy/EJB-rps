@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Rock Paper Scissors</title>
+    </h:head>
+    <h:body>
+        
+        <b:navBar brand="Rock Paper Scissors in EJB" brandHref="#" inverse="true">
+            <b:navbarLinks>
+                <b:navLink value="Home" href="index.xhtml"></b:navLink>
+                <b:navLink value="Account:#{LoginView.loggedUsername}" href="#"></b:navLink>
+                <b:navLink value="Logout" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        
+        <b:well>
+            <h3>Rock Paper Scissors</h3>
+        </b:well>
+        
+        <b:panel title="Login" collapsible="false">
+            <f:view>
+                <h:form>
+                    <h:outputLabel value="Username: "/><h:inputText value="#{LoginView.player.username}"/> <br/>
+                <h:outputLabel value="Password: "/><h:inputSecret value="#{LoginView.player.password    }"/> <br/> <br/>
+                <h:commandButton action="#{LoginView.postPlayer}" value="Login"/>
+                </h:form>
+            </f:view>
+       </b:panel>
+        
+        <b:panel title="Register" collapsible="false">
+            <f:view>
+            <h:form>
+            <h:outputLabel value="Username: "/><h:inputText value="#{RegisterView.player.username}"/> <br/>
+            <h:outputLabel value="Password: "/><h:inputSecret value="#{RegisterView.player.password    }"/> <br/> <br/>
+            <h:commandButton action="#{RegisterView.postPlayerRegister}" value="Create User"/>
+            </h:form>
+            </f:view>
+       </b:panel>
+        
+       
+        <f:view>
+             <h:form>
+                <h:commandButton id="button" value="Log out" action="#{LoginView.logout}" />
+             </h:form>
+        </f:view>
+        
+        
+        <!--<h:outputText value="#{LoginView.loggedUsername}"/>-->
+            
+    </h:body>
+</html>
