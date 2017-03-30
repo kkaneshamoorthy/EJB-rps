@@ -86,10 +86,42 @@ public class PlayerFacade extends AbstractFacade<Player> {
         Player player = new Player();
         player.setUsername(username);
         player.setPassword(password);
+        player.setNumberOfDraws("0");
+        player.setNumberOfLoss("0");
+        player.setNumberOfWins("0");
         
         this.create(player);
         
         return true;
+    }
+    
+    private Player getPlayer(String username) {
+        List<Player> ls = this.findAll();
+        
+        for (Player player : ls) {
+            if (player.getUsername().equals(username))
+                return player;
+        }
+        
+        return null;
+    }
+    
+    public String getNumberOfWins(String username) {
+        Player player = this.getPlayer(username);
+        
+        return player.getNumberOfWins();
+    }
+    
+    public String getNumberOfLoss(String username) {
+        Player player = this.getPlayer(username);
+        
+        return player.getNumberOfLoss();
+    }
+    
+    public String getNumberOfDraws(String username) {
+        Player player = this.getPlayer(username);
+        
+        return player.getNumberOfDraws();
     }
     
 }

@@ -29,6 +29,39 @@ public class Player implements Serializable {
     
     @Column(name="password")
     private String password;
+    
+    @Column(name="number_of_wins")
+    private String numberOfWins;
+    
+    @Column(name="number_of_loss")
+    private String numberOfLoss;
+    
+    @Column(name="number_of_draws")
+    private String numberOfDraws;
+
+    public String getNumberOfWins() {
+        return numberOfWins;
+    }
+
+    public void setNumberOfWins(String numberOfWins) {
+        this.numberOfWins = numberOfWins;
+    }
+
+    public String getNumberOfLoss() {
+        return numberOfLoss;
+    }
+
+    public void setNumberOfLoss(String numberOfLoss) {
+        this.numberOfLoss = numberOfLoss;
+    }
+
+    public String getNumberOfDraws() {
+        return numberOfDraws;
+    }
+
+    public void setNumberOfDraws(String numberOfDraws) {
+        this.numberOfDraws = numberOfDraws;
+    }
 
     public String getUsername() {
         return username;

@@ -22,33 +22,27 @@
         </b:navBar>
         
         <b:well>
-            <h3>Rock Paper Scissors</h3>
+            <h3>Rock Paper Scissors - Account</h3>
         </b:well>
         
-        <b:panel title="Login" collapsible="false">
+        
+      
+        
+        <b:panel title="Number of Wins:" collapsible="false">
             <f:view>
-                <h:form>
-                    <h:outputLabel value="Username: "/><h:inputText value="#{LoginView.player.username}"/> <br/>
-                <h:outputLabel value="Password: "/><h:inputSecret value="#{LoginView.player.password    }"/> <br/> <br/>
-                <h:commandButton action="#{LoginView.postPlayer}" value="Login"/>
-                </h:form>
+                <h:outputText value="#{AccountView.numberOfWins}"/>
             </f:view>
        </b:panel>
         
-        <b:panel title="Register" collapsible="false">
+        <b:panel title="Number of Loss" collapsible="false">
             <f:view>
-            <h:form>
-            <h:outputLabel value="Username: "/><h:inputText value="#{RegisterView.player.username}"/> <br/>
-            <h:outputLabel value="Password: "/><h:inputSecret value="#{RegisterView.player.password    }"/> <br/> <br/>
-            <h:commandButton action="#{RegisterView.postPlayerRegister}" value="Create User"/>
-            </h:form>
+                <h:outputText value="#{AccountView.numberOfLoss}"/>
             </f:view>
        </b:panel>
         
-       
-       <b:panel title="Online users" collapsible="false">
+        <b:panel title="Number of Draw" collapsible="false">
             <f:view>
-                <h:outputText value="#{LoginView.onlineUsers}"/>
+                <h:outputText value="#{AccountView.numberOfDraw}"/>
             </f:view>
        </b:panel>
             

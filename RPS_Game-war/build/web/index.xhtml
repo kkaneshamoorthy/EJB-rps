@@ -12,8 +12,12 @@
         <b:navBar brand="Rock Paper Scissors in EJB" brandHref="#" inverse="true">
             <b:navbarLinks>
                 <b:navLink value="Home" href="index.xhtml"></b:navLink>
-                <b:navLink value="Account:#{LoginView.loggedUsername}" href="#"></b:navLink>
-                <b:navLink value="Logout" href="#"></b:navLink>
+                <b:navLink value="Game" href="game.xhtml"></b:navLink>
+                <b:navLink value="Account:#{LoginView.loggedUsername}" href="account.xhtml"></b:navLink>
+                <b:navLink value="" href=""><h:form><h:commandButton action="#{LoginView.logout}" value="Logout"/></h:form></b:navLink>
+                
+                
+                <b:navLink value="Number of users logged in: "><h:outputText value="#{LoginView.numberOfPlayers}"/></b:navLink>
             </b:navbarLinks>
         </b:navBar>
         
@@ -42,14 +46,11 @@
        </b:panel>
         
        
-        <f:view>
-             <h:form>
-                <h:commandButton id="button" value="Log out" action="#{LoginView.logout}" />
-             </h:form>
-        </f:view>
-        
-        
-        <!--<h:outputText value="#{LoginView.loggedUsername}"/>-->
+       <b:panel title="Online users" collapsible="false">
+            <f:view>
+                <h:outputText value="#{LoginView.onlineUsers}"/>
+            </f:view>
+       </b:panel>
             
     </h:body>
 </html>

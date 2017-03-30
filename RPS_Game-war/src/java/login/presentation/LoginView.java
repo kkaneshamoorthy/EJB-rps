@@ -6,6 +6,7 @@
 package login.presentation;
 
 import entity.Player;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,16 @@ public class LoginView {
     public int getNumberOfPlayers() {
         return PlayerFacade.getNumberOfUsersOnline();
     }
-   
+    
+    public String getOnlineUsers() {
+        StringBuilder sb = new StringBuilder();
+        for (String username : PlayerFacade.getOnlineUsers()) {
+            sb.append(username+" \n");
+        }
+        
+        return sb.toString();
+    }
+    
     public String postPlayer() {
         
         String username = player.getUsername();
@@ -53,30 +63,27 @@ public class LoginView {
         
         if (this.playerFacade.login(username, password)) {
             loggedUsername = username;
-            FacesContext.getCurrentInstance()
-                            .getExternalContext()
-                            .addResponseCookie("username", username, null);
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("username", username);
             
             return "theend";
         } else {
             return "incorrectLogin";
         }
-        
-        
-//        this.playerFacade.create(player);
-//        return "theend";
     }
     
     public String getLoggedUsername() {
-        Map<String, Object> requestCookieMap = FacesContext.getCurrentInstance()
+        Map<String, Object> map = FacesContext.getCurrentInstance()
                     .getExternalContext()
-                    .getRequestCookieMap();
-        
-        return ((Cookie) requestCookieMap.get("username")).getValue();
+                    .getSessionMap();
+//        
+        return ((String) map.get("username"));
     }
     
-    public String logout(){
+    public String logout() throws IOException{
         this.playerFacade.logout(this.getLoggedUsername());
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "theend";
     }
     
