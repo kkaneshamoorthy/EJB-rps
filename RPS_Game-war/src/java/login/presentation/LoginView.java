@@ -50,7 +50,7 @@ public class LoginView {
     public String getOnlineUsers() {
         StringBuilder sb = new StringBuilder();
         for (String username : PlayerFacade.getOnlineUsers()) {
-            sb.append(username+" \n");
+            sb.append(username);
         }
         
         return sb.toString();
@@ -67,7 +67,7 @@ public class LoginView {
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getSessionMap().put("username", username);
             
-            return "theend";
+            return "index";
         } else {
             return "incorrectLogin";
         }
@@ -85,6 +85,22 @@ public class LoginView {
         this.playerFacade.logout(this.getLoggedUsername());
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "theend";
+    }
+    
+    public Player getPlayer(String username) {
+        List<Player> ls = this.playerFacade.findAll();
+        
+        for (Player player : ls) {
+            if (player.getUsername().equals(username)) {
+                return player;
+            }
+        }
+        
+        return null;
+    }
+    
+    public void editPlayer(Player player) {
+        this.playerFacade.edit(player);
     }
     
 }

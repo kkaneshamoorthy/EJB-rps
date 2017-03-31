@@ -23,32 +23,31 @@
             <h3>Rock Paper Scissors - Game</h3>
         </b:well>
         
+        <h:outputText value="#{GameView.message}"/>
+        
         <b:panel title="Game" collapsible="false">
             <f:view>
                 <h:form>
-                    <h:outputText value="Found Player: Kowri #{LoginView.onlineUsers}"/>
                     <h:commandButton action="#{GameView.startGame}" value="Start Game"/>
                 </h:form>
             </f:view>
        </b:panel>
-        
+       
        <b:panel>
            <h:form>
-        <h:selectOneRadio value="#{GameView.selectedOption}">
-            <f:selectItem itemValue="#{GameView.rock}" itemLabel="Rock" />
-            <f:selectItem itemValue="#{GameView.paper}" itemLabel="Paper" />
-            <f:selectItem itemValue="#{GameView.scissors}" itemLabel="Scissor" />
-        </h:selectOneRadio>
-           <b:commandButton value="Submit" action="#{GameView.selected}" />
+               <h:selectOneRadio value="#{GameView.selectedOption}">
+                <f:selectItem itemValue="Rock" itemLabel="Rock" />
+                <f:selectItem itemValue="Paper" itemLabel="Paper" />
+                <f:selectItem itemValue="Scissors" itemLabel="Scissor" />
+            </h:selectOneRadio>
+               <b:commandButton action="#{GameView.submitOption}" value="Submit" />
            </h:form>
-      </b:panel>
-        
+        </b:panel>
         
        <b:panel title="Online users" collapsible="false">
             <f:view>
                 <h:outputText value="#{LoginView.onlineUsers}"/>
             </f:view>
        </b:panel>
-            
     </h:body>
 </html>

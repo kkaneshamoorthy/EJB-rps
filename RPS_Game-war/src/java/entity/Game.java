@@ -33,6 +33,25 @@ public class Game implements Serializable {
     
     @Column(name="winner")
     private String winner;
+    
+    @Column(name="draw")
+    private boolean draw;
+    
+    public boolean isDraw() {
+        return draw;
+    }
+
+    public void setDraw(boolean draw) {
+        this.draw = draw;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
 
     public String getPlayerA() {
         return playerA;

@@ -123,5 +123,4 @@ public class PlayerFacade extends AbstractFacade<Player> {
         
         return player.getNumberOfDraws();
     }
-    
 }
