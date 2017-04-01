@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         
-        <b:navBar brand="Rock Paper Scissors in EJB" brandHref="#" inverse="true">
+        <b:navBar brand="Rock Paper Scissors in EJB" brandHref="index.xhtml" inverse="true">
             <b:navbarLinks>
                 <b:navLink value="Home" href="index.xhtml"></b:navLink>
                 <b:navLink value="Game" href="game.xhtml"></b:navLink>
@@ -25,26 +25,25 @@
             <h3>Rock Paper Scissors - Account</h3>
         </b:well>
         
-        
-      
-        
-        <b:panel title="Number of Wins:" collapsible="false">
-            <f:view>
-                <h:outputText value="#{AccountView.numberOfWins}"/>
-            </f:view>
-       </b:panel>
-        
-        <b:panel title="Number of Loss" collapsible="false">
-            <f:view>
-                <h:outputText value="#{AccountView.numberOfLoss}"/>
-            </f:view>
-       </b:panel>
-        
-        <b:panel title="Number of Draw" collapsible="false">
-            <f:view>
-                <h:outputText value="#{AccountView.numberOfDraw}"/>
-            </f:view>
-       </b:panel>
+        <b:panelGrid colSpans="4,4,4" size="xs">
+            <b:panel look="info" title="Number of Wins:" collapsible="false">
+                <f:view>
+                    <h:outputText value="#{AccountView.numberOfWins}"/>
+                </f:view>
+           </b:panel>
+
+            <b:panel look="info" title="Number of Loss" collapsible="false">
+                <f:view>
+                    <h:outputText value="#{AccountView.numberOfLoss}"/>
+                </f:view>
+           </b:panel>
+
+            <b:panel look="info" title="Number of Draw" collapsible="false">
+                <f:view>
+                    <h:outputText value="#{AccountView.numberOfDraw}"/>
+                </f:view>
+           </b:panel>
+        </b:panelGrid>
             
     </h:body>
 </html>

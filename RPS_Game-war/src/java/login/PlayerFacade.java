@@ -7,7 +7,11 @@ package login;
 
 import entity.Player;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -61,12 +65,8 @@ public class PlayerFacade extends AbstractFacade<Player> {
     }
     
     public static void removeOnlineUser(String userToRemove) {
-        for (int i=0; i<usersOnline.size(); i++) {
-            System.out.println(usersOnline.get(i) + " " + userToRemove);
-            if (userToRemove.equals(usersOnline.get(i))) {
-                usersOnline.remove(userToRemove);
-                break;
-            }
+        if (usersOnline.contains(userToRemove)) {
+            usersOnline.remove(userToRemove);
         }
     }
     
@@ -122,5 +122,22 @@ public class PlayerFacade extends AbstractFacade<Player> {
         Player player = this.getPlayer(username);
         
         return player.getNumberOfDraws();
+    }
+    
+    public List<String> getLeaderBoard() {
+        SortedMap<String, Player> ls = new TreeMap<>();
+        for (Player player : this.findAll()) {
+            ls.put(Integer.parseInt(player.getNumberOfWins())+player.getUsername(), player);
+        }
+        
+        List<String> rank = new ArrayList<String>();
+        
+        for (String username : ls.keySet()) {
+            rank.add(ls.get(username).getUsername()+" "+ls.get(username).getNumberOfWins());
+            
+        }
+        Collections.reverse(rank);
+        
+        return rank.subList(0, 10);
     }
 }

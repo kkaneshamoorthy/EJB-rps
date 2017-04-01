@@ -3,13 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Rock Paper Scissors</title>
     </h:head>
     <h:body>
         
-        <b:navBar brand="Rock Paper Scissors in EJB" brandHref="#" inverse="true">
+        <b:navBar brand="Rock Paper Scissors in EJB" brandHref="index.xhtml" inverse="true">
             <b:navbarLinks>
                 <b:navLink value="Home" href="index.xhtml"></b:navLink>
                 <b:navLink value="Game" href="game.xhtml"></b:navLink>
@@ -25,29 +26,35 @@
         
         <h:outputText value="#{GameView.message}"/>
         
-        <b:panel title="Game" collapsible="false">
-            <f:view>
+        <b:panelGrid colSpans="4,4,4" size="xs">
+            <b:panel title="Game" look="info" collapsible="false">
+                <f:view>
+                    <h:form>
+                        <h:commandButton action="#{GameView.startGame}" value="Start Game"/>
+                    </h:form>
+                </f:view>
+           </b:panel>
+                 
+            <b:panel title="Game" look="info" collapsible="false">
                 <h:form>
-                    <h:commandButton action="#{GameView.startGame}" value="Start Game"/>
+                    <h:selectOneRadio value="#{GameView.selectedOption}" layout="pageDirection">
+                     <f:selectItem itemValue="Rock" itemLabel="Rock" /> 
+                     <f:selectItem itemValue="Paper" itemLabel="Paper" /> 
+                     <f:selectItem itemValue="Scissors" itemLabel="Scissor" /> 
+                 </h:selectOneRadio>
+                    <b:commandButton action="#{GameView.submitOption}" value="Submit" />
                 </h:form>
-            </f:view>
-       </b:panel>
-       
-       <b:panel>
-           <h:form>
-               <h:selectOneRadio value="#{GameView.selectedOption}">
-                <f:selectItem itemValue="Rock" itemLabel="Rock" />
-                <f:selectItem itemValue="Paper" itemLabel="Paper" />
-                <f:selectItem itemValue="Scissors" itemLabel="Scissor" />
-            </h:selectOneRadio>
-               <b:commandButton action="#{GameView.submitOption}" value="Submit" />
-           </h:form>
-        </b:panel>
-        
-       <b:panel title="Online users" collapsible="false">
-            <f:view>
-                <h:outputText value="#{LoginView.onlineUsers}"/>
-            </f:view>
-       </b:panel>
+           </b:panel>
+            
+            <b:panel look="info" title="Leader board - top ten players" collapsible="false">
+                <ul>
+                    <ui:repeat value="#{LoginView.leaderBoard}" var="username">
+                        <li>
+                            #{username}
+                        </li>
+                    </ui:repeat>
+                </ul>
+           </b:panel>
+        </b:panelGrid>
     </h:body>
 </html>

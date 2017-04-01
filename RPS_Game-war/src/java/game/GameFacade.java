@@ -8,6 +8,7 @@ package game;
 import entity.Game;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -107,25 +108,29 @@ public class GameFacade extends AbstractFacade<Game> {
     public String getWinner(Game game, GameDetails gameData) {
         String playerAOption = gameData.getPlayerAOption();
         String playerBOption = gameData.getPlayerBOption();
+        String playerA = gameData.getPlayerA();
+        String playerB = gameData.getPlayerB();
         
         if (playerAOption.equals(playerBOption)) {
             game.setDraw(true);
-        } else if (playerAOption.equals("Scissors") && playerBOption.equals("Paper")) {
-            game.setWinner(game.getPlayerA());
-        } else if (playerBOption.equals("Scissors") && playerAOption.equals("Paper")) {
-            game.setWinner(game.getPlayerB());
+        }
+        
+        if (playerAOption.equals("Scissors") && playerBOption.equals("Paper")) {
+            game.setWinner(playerA);
+        } else if (playerAOption.equals("Scissors") && playerBOption.equals("Rock")) {
+            game.setWinner(playerB);
+        }
+        
+        if (playerAOption.equals("Paper") && playerBOption.equals("Scissors")) {
+            game.setWinner(playerB);
+        } else if (playerAOption.equals("Scissors") && playerBOption.equals("Rock")) {
+            game.setWinner(playerB);
+        }
+        
+        if (playerAOption.equals("Rock") && playerBOption.equals("Scissors")) {
+            game.setWinner(playerA);
         } else if (playerAOption.equals("Paper") && playerBOption.equals("Rock")) {
-            game.setWinner(game.getPlayerA());
-        } else if (playerBOption.equals("Paper") && playerAOption.equals("Rock")) {
-            game.setWinner(game.getPlayerB());
-        } else if (playerAOption.equals("Sicssors") && playerBOption.equals("Rock")) {
-            game.setWinner(game.getPlayerB());
-        } else if (playerBOption.equals("Sicssors") && playerAOption.equals("Rock")) {
-            game.setWinner(game.getPlayerA());
-        } else if (playerAOption.equals("Sic") && playerBOption.equals("Rock")) {
-            game.setWinner(game.getPlayerA());
-        } else if (playerBOption.equals("Paper") && playerAOption.equals("Rock")) {
-            game.setWinner(playerBOption);
+            game.setWinner(playerA);
         }
         
         return game.getWinner();

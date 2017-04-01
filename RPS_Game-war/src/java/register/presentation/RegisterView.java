@@ -21,12 +21,21 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "RegisterView")
 @RequestScoped
 public class RegisterView {
-
     
     @EJB
     private PlayerFacade playerFacade;
     
-    Player player;
+    private Player player;
+    
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     /**
      * Creates a new instance of RegisterView
@@ -50,9 +59,10 @@ public class RegisterView {
         String password = player.getPassword();
         
         if (this.playerFacade.registerUser(username, password)) {
-            return "theend";
+            return "index";
         } else {
-            return "incorrectLogin";
+            this.message = "Failed to create account. The username may already exist...";
+            return "index";
         }
     }
 }

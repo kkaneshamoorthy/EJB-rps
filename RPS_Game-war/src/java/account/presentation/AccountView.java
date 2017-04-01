@@ -52,7 +52,6 @@ public class AccountView {
         LoginView loginView = (LoginView) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "LoginView");
         
         String username = loginView.getLoggedUsername();
-        System.out.println("sdoifhdriofghidhgihdr " + username);
         if (username == null) {
             return "Login to view";
         }

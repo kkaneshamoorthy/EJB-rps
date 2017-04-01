@@ -28,9 +28,39 @@ public class LoginView {
     @EJB
     private PlayerFacade playerFacade;
     
-    Player player;
+    private Player player;
     
-    String loggedUsername="";
+    private List<String> usersOnline;
+    
+    private List<String> leaderBoard;
+
+    public List<String> getLeaderBoard() {
+        return this.playerFacade.getLeaderBoard();
+    }
+
+    public void setLeaderBoard(List<String> leaderBoard) {
+        this.leaderBoard = leaderBoard;
+    }
+
+    public List<String> getUsersOnline() {
+        return PlayerFacade.getOnlineUsers();
+    }
+
+    public void setUsersOnline(List<String> usersOnline) {
+        this.usersOnline = usersOnline;
+    }
+    
+    private String loggedUsername="";
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    private String message;
     
     /**
      * Creates a new instance of LoginView
@@ -48,9 +78,9 @@ public class LoginView {
     }
     
     public String getOnlineUsers() {
-        StringBuilder sb = new StringBuilder();
+        String sb = new String();
         for (String username : PlayerFacade.getOnlineUsers()) {
-            sb.append(username);
+            sb+=username+"\n";
         }
         
         return sb.toString();
@@ -67,9 +97,12 @@ public class LoginView {
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getSessionMap().put("username", username);
             
+            this.setUsersOnline(PlayerFacade.getOnlineUsers());
+            
             return "index";
         } else {
-            return "incorrectLogin";
+            this.message="Incorrect username or password. Please try agin...";
+            return "index";
         }
     }
     
@@ -84,7 +117,8 @@ public class LoginView {
     public String logout() throws IOException{
         this.playerFacade.logout(this.getLoggedUsername());
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "theend";
+        
+        return "index";
     }
     
     public Player getPlayer(String username) {
@@ -102,5 +136,4 @@ public class LoginView {
     public void editPlayer(Player player) {
         this.playerFacade.edit(player);
     }
-    
 }

@@ -70,7 +70,6 @@ public class GameView implements Serializable {
     }
     
     public String startGame() throws IOException {
-        System.out.println(this.getSelectedOption());
         
         Map<String, Object> map = FacesContext.getCurrentInstance()
                     .getExternalContext()
@@ -132,7 +131,7 @@ public class GameView implements Serializable {
                 Player playerB = loginView.getPlayer(game.getPlayerB());
                 
                 if (winner == null) { 
-                    winner = "Both";
+                    this.message = "The winner is: Both";
                     
                     int scoreA = Integer.parseInt(playerA.getNumberOfDraws())+1;
                     playerA.setNumberOfDraws(scoreA+"");
@@ -156,6 +155,7 @@ public class GameView implements Serializable {
                         playerA.setNumberOfLoss(scoreA+"");
                     }
                 }
+                
                 this.gameFacade.endGame(game);
                 loginView.editPlayer(playerA);
                 loginView.editPlayer(playerB);
